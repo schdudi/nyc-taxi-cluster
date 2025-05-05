@@ -11,8 +11,8 @@ st.set_page_config(page_title="NYC Taxi Cluster Explorer", layout="wide")
 st.title('🚖 NYC Yellow Taxi Trip Clustering Analysis')
 
 # Load preprocessed data
-cluster_centers = pd.read_csv("C:/Users/17740/Desktop/cluster_centers.csv")
-cluster_stats = pd.read_csv("C:/Users/17740/Desktop/cluster_stats.csv")
+cluster_centers = pd.read_csv("cluster_centers.csv")
+cluster_stats = pd.read_csv("cluster_stats.csv")
 
 # Weekday mapping
 weekday_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
