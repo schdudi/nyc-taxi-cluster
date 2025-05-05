@@ -8,7 +8,7 @@ import plotly.express as px
 
 # Page config
 st.set_page_config(page_title="NYC Taxi Cluster Explorer", layout="wide")
-st.title('🚖 NYC Yellow Taxi Trip Clustering Analysis')
+st.title('🚖 NYC Yellow Taxi Pickup Zone Analysis')
 
 # Load preprocessed data
 cluster_centers = pd.read_csv("cluster_centers.csv")
@@ -27,8 +27,8 @@ with col2:
     selected_hour = st.selectbox('🕒 Select Hour (0–23)', list(range(24)))
 
 # Map interaction section
-st.header('🗺 Click on the Map to Get Cluster Recommendations')
-st.markdown("👉 Click on any location on the map below. The system will recommend the nearest and most active cluster based on your selected day and hour.")
+st.header('🗺 Click on the Map to Get Pickup Zone Recommendations')
+st.markdown("👉 Click on any location on the map below. The system will recommend the nearest and most active zone based on your selected day and hour.")
 
 # Initial map
 m = folium.Map(location=[40.75, -73.98], zoom_start=12)
@@ -72,9 +72,9 @@ if map_data.get('last_clicked') is not None:
 
     # Show recommendation results
     st.subheader("✅ Recommended Clusters")
-    st.write(f"📌 Nearest Cluster: **{nearest_cluster_id}** (lat: {nearest_row['lat']:.4f}, lon: {nearest_row['lon']:.4f})")
+    st.write(f"📌 Nearest Pickup Spot: **{nearest_cluster_id}** (lat: {nearest_row['lat']:.4f}, lon: {nearest_row['lon']:.4f})")
     if hottest_row is not None:
-        st.write(f"🔥 Hottest Cluster at that time: **{hottest_cluster_id}** (lat: {hottest_row['lat']:.4f}, lon: {hottest_row['lon']:.4f})")
+        st.write(f"🔥 Busiest Pickup Spot at that time: **{hottest_cluster_id}** (lat: {hottest_row['lat']:.4f}, lon: {hottest_row['lon']:.4f})")
     else:
         st.write("⚠️ No trip data found for the selected time.")
 
@@ -113,7 +113,7 @@ if map_data.get('last_clicked') is not None:
     st_folium(m2, height=500, width=700)
 
 # Animated hourly heatmap
-st.header("🔥 Animated Cluster Activity Heatmap (Hourly)")
+st.header("🔥 Animated Pickup Spot Activity Heatmap (Hourly)")
 
 # Merge location and stats
 stats_with_location = cluster_stats.merge(cluster_centers, on='cluster_id')
@@ -137,7 +137,7 @@ fig.update_layout(mapbox_style="carto-positron")
 st.plotly_chart(fig, use_container_width=True)
 
 # Cluster bar chart
-st.header("📊 View Trip Activity of a Specific Cluster")
+st.header("📊 View Trip Activity of a Specific Pickup Zone")
 selected_cluster_id = st.selectbox("Select a Cluster ID", cluster_stats['cluster_id'].unique())
 filtered = cluster_stats[cluster_stats['cluster_id'] == selected_cluster_id]
 
