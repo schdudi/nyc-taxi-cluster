@@ -130,7 +130,7 @@ fig = px.scatter_mapbox(
     size_max=15,
     zoom=11,
     height=600,
-    title=f"Hourly Cluster Activity on {selected_weekday_name}"
+    title=f"Hourly Pickup Spot Activity on {selected_weekday_name}"
 )
 
 fig.update_layout(mapbox_style="carto-positron")
